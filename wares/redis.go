@@ -3,7 +3,7 @@ package wares
 import (
 	"strings"
 	"github.com/go-redis/redis"
-	"benchmark/config"
+	"redisbench/config"
 )
 
 

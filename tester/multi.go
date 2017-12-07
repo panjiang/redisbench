@@ -1,12 +1,12 @@
 package tester
 
 import (
-	"benchmark/config"
-	"benchmark/models"
-	"benchmark/utils"
 	"errors"
 	"log"
 	"net/rpc"
+	"redisbench/config"
+	"redisbench/models"
+	"redisbench/utils"
 	"strings"
 	"time"
 )

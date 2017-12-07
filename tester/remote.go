@@ -1,12 +1,12 @@
 package tester
 
 import (
-	"benchmark/models"
-	"benchmark/utils"
 	"log"
 	"net"
 	"net/http"
 	"net/rpc"
+	"redisbench/models"
+	"redisbench/utils"
 )
 
 // RPC : RPC class between nodes

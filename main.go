@@ -1,13 +1,13 @@
 package main
 
 import (
-	"benchmark/config"
-	"benchmark/models"
-	"benchmark/tester"
-	"benchmark/utils"
-	"benchmark/wares"
 	"fmt"
 	"log"
+	"redisbench/config"
+	"redisbench/models"
+	"redisbench/tester"
+	"redisbench/utils"
+	"redisbench/wares"
 	"time"
 
 	"github.com/go-redis/redis"
