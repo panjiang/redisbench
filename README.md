@@ -1,6 +1,8 @@
 # Redis & Redis Cluster redisbench Tool
+* Written in Golang
 * Can test redis single instance
 * Can test redis cluster
+* Can take advantage of multi-core
 * Supports running on multiple machines at the same time, for testing a large redis cluster
 
 ## Help
