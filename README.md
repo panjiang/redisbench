@@ -1,4 +1,4 @@
-# Redis & Redis Cluster redisbench Tool
+# Redis & Redis Cluster benchmark Tool
 * Written in Golang
 * Can test redis single instance
 * Can test redis cluster
