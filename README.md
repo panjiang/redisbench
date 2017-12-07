@@ -3,7 +3,7 @@
 * Can test redis single instance
 * Can test redis cluster
 * Can take advantage of multi-core
-* Supports running on multiple machines at the same time, for testing a large redis cluster
+* Supports running on multiple machines at the same time, for testing a large redis cluster (The same hardware of machines are needed for )
 
 ## Help
 ```
@@ -14,7 +14,7 @@
 
 ### Test single instance
 ```
-./redisbench -a 192.168.10.11:6379 -c 500 -n 2000 -d 3
+./redisbench -a 127.0.0.1:6379 -c 500 -n 2000 -d 3
 ```
 
 ### Test cluster

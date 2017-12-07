@@ -56,26 +56,32 @@ func main() {
 
 	// Calculate duration while done (can't be 0, min is 1)
 	dur := t2 - t1
-	result := &models.NodeResult{Order: tester.Multi.Order, TotalTimes: totalTimes, TsBeg: t1, TsEnd: t2, TotalDur: dur}
+	order := 1
+	if tester.Multi != nil {
+		order = tester.Multi.Order
+	}
+	result := &models.NodeResult{Order: order, TotalTimes: totalTimes, TsBeg: t1, TsEnd: t2, TotalDur: dur}
 	tps := int(result.TotalTimes / (result.TotalDur / 1000.0))
 	log.Println("# BENCHMARK DONE")
 	log.Printf("* SUM: %d, DUR: %0.3fs, TPS: %d", result.TotalDur, float64(result.TotalDur)/1000, tps)
 
-	if !tester.Multi.IsMaster() {
-		// Notice master to settle
-		tester.Multi.NoticeMasterSettle(result)
-		log.Println("see summary info on node 1")
-	} else {
-		tester.Wg.Add(1) // Wait all others nodes settling call
-		tester.Multi.NodeSettle(result)
+	if tester.Multi != nil {
+		if !tester.Multi.IsMaster() {
+			// Notice master to settle
+			tester.Multi.NoticeMasterSettle(result)
+			log.Println("see summary info on node 1")
+		} else {
+			tester.Wg.Add(1) // Wait all others nodes settling call
+			tester.Multi.NodeSettle(result)
 
-		tester.Wg.Wait()
-		time.Sleep(time.Second)
-		// Summary all nodes result include self
-		summary := tester.Multi.Summary()
+			tester.Wg.Wait()
+			time.Sleep(time.Second)
+			// Summary all nodes result include self
+			summary := tester.Multi.Summary()
 
-		// Print testing result
-		log.Println("# SUMMARY")
-		log.Printf("* SUM: %d, DUR: %.3fs, TPS: %d", summary.TotalTimes, float64(summary.TotalDur)/1000, summary.TPS)
+			// Print testing result
+			log.Println("# SUMMARY")
+			log.Printf("* SUM: %d, DUR: %.3fs, TPS: %d", summary.TotalTimes, float64(summary.TotalDur)/1000, summary.TPS)
+		}
 	}
 }
