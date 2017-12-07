@@ -1,4 +1,7 @@
 # Redis & Redis Cluster redisbench Tool
+* Can test redis single instance
+* Can test redis cluster
+* Supports running at multiple machines at the same time, for testing a large redis cluster
 
 ## Help
 ```
