@@ -54,7 +54,7 @@ func main() {
 	tester.Wg.Wait()
 	t2 := utils.NowMilliTs()
 
-	// Calculate duration while done (can't be 0, min is 1)
+	// Calculate the duration
 	dur := t2 - t1
 	order := 1
 	if tester.Multi != nil {
