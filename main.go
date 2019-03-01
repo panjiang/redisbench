@@ -36,10 +36,10 @@ func main() {
 
 	// Print test initial information
 	totalTimes := int64(config.ClientNum * config.TestTimes)
-	totalSize := int64(config.ClientNum * config.DataSize)
+	totalSize := int64(config.ClientNum * config.TestTimes * config.DataSize)
 	log.Printf("# BENCHMARK (CLUSTER: %v)", config.ClusterMode)
-	log.Printf("* ClientNumber:%d, TestTimes:%d, DataSize:%d", config.ClientNum, config.TestTimes, config.DataSize)
-	log.Printf("* TotalTimes:%d, TotalSize:%d", totalTimes, totalSize)
+	log.Printf("* Clients Number: %d, Testing Times: %d, Data Size(B): %d", config.ClientNum, config.TestTimes, config.DataSize)
+	log.Printf("* Total Times: %d, Total Size(B): %d", totalTimes, totalSize)
 
 	// Create a new redis client
 	redisClient, err := wares.NewUniversalRedisClient()
@@ -61,9 +61,9 @@ func main() {
 		order = tester.Multi.Order
 	}
 	result := &models.NodeResult{Order: order, TotalTimes: totalTimes, TsBeg: t1, TsEnd: t2, TotalDur: dur}
-	tps := int(result.TotalTimes / (result.TotalDur / 1000.0))
+	tps := int(float64(result.TotalTimes) / (float64(result.TotalDur) / 1000))
 	log.Println("# BENCHMARK DONE")
-	log.Printf("* SUM: %d, DUR: %0.3fs, TPS: %d", result.TotalDur, float64(result.TotalDur)/1000, tps)
+	log.Printf("* TIMES: %d, DUR(s): %0.3f, TPS(Hz): %d", result.TotalTimes, float64(result.TotalDur)/1000, tps)
 
 	if tester.Multi != nil {
 		if !tester.Multi.IsMaster() {

@@ -28,7 +28,7 @@ var MultiOrder int
 func Parse() {
 	flag.StringVar(&RedisAddr, "a", "", "Redis instance address or Cluster addresses. IP:PORT[,IP:PORT]")
 	flag.IntVar(&ClientNum, "c", 1, "Clients number for concurrence")
-	flag.IntVar(&TestTimes, "n", 1, "Testing times at every client")
+	flag.IntVar(&TestTimes, "n", 3000, "Testing times at every client")
 	flag.IntVar(&DataSize, "d", 1000, "Data size in bytes")
 	flag.BoolVar(&ClusterMode, "cluster", false, "true: cluster mode, false: instance mode")
 	flag.StringVar(&MultiAddr, "ma", "", "addresses for run multiple testers at the same time")
