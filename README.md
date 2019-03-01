@@ -10,6 +10,21 @@
 
 ```console
 $ ./redisbench -h
+
+  -a string
+        Redis instance address or Cluster addresses. IP:PORT[,IP:PORT]
+  -c int
+        Clients number for concurrence (default 1)
+  -cluster
+        true: cluster mode, false: instance mode
+  -d int
+        Data size in bytes (default 1000)
+  -ma string
+        addresses for run multiple testers at the same time
+  -mo int
+        the order current tester is in multiple testers
+  -n int
+        Testing times at every client (default 3000)
 ```
 
 ## Example
