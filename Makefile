@@ -1,3 +1,3 @@
 
 build:
-	bash ./sh/build-all.sh
+	bash ./scripts/build-all.sh

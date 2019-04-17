@@ -1,11 +1,11 @@
 package wares
 
 import (
-	"strings"
-	"github.com/go-redis/redis"
 	"redisbench/config"
-)
+	"strings"
 
+	"github.com/go-redis/redis"
+)
 
 // A single instance redis client instance
 func newRedisClient(addr string, pwd string, db int) (redis.UniversalClient, error) {
@@ -23,8 +23,8 @@ func newRedisClient(addr string, pwd string, db int) (redis.UniversalClient, err
 }
 
 // A redis cluster client instance
-func newRedisClusterClient(nodes_addr string) (redis.UniversalClient, error) {
-	addrsArray := strings.Split(nodes_addr, ",")
+func newRedisClusterClient(nodesAddr string) (redis.UniversalClient, error) {
+	addrsArray := strings.Split(nodesAddr, ",")
 	client := redis.NewUniversalClient(&redis.UniversalOptions{
 		Addrs: addrsArray,
 	})
@@ -37,13 +37,12 @@ func newRedisClusterClient(nodes_addr string) (redis.UniversalClient, error) {
 	return client, nil
 }
 
-
-// Create a new universal redis client, no matter single instance or redis cluster
+// NewUniversalRedisClient Creates a new universal redis client, no matter single instance or redis cluster
 func NewUniversalRedisClient() (redisClient redis.UniversalClient, err error) {
 	if config.ClusterMode {
 		redisClient, err = newRedisClusterClient(config.RedisAddr)
 	} else {
-		redisClient, err = newRedisClient(config.RedisAddr, "", 0)
+		redisClient, err = newRedisClient(config.RedisAddr, config.RedisPassword, config.RedisDB)
 	}
 	return
 }

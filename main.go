@@ -37,7 +37,7 @@ func main() {
 	// Print test initial information
 	totalTimes := int64(config.ClientNum * config.TestTimes)
 	totalSize := int64(config.ClientNum * config.TestTimes * config.DataSize)
-	log.Printf("# BENCHMARK (CLUSTER: %v)", config.ClusterMode)
+	log.Printf("# BENCHMARK %s", config.NodeInfo())
 	log.Printf("* Clients Number: %d, Testing Times: %d, Data Size(B): %d", config.ClientNum, config.TestTimes, config.DataSize)
 	log.Printf("* Total Times: %d, Total Size(B): %d", totalTimes, totalSize)
 
