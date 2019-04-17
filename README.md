@@ -6,6 +6,10 @@
 - Can take advantage of multi-core
 - Supports running on multiple machines at the same time, for testing a large redis cluster (The same hardware of machines are needed for )
 
+## Warning
+
+Testing data keys named like `benchmark.set.*`, make sure they are not conflicting with your keys.
+
 ## Help
 
 ```console
@@ -50,7 +54,7 @@ $ ./redisbench -a 127.0.0.1:6379 -c 10 -n 2000 -d 1000
 
 ```
 
-Redis keys like these `benchmark.set.{client_id}.{test_times}`:
+Redis keys like `benchmark.set.{client_id}.{test_times}`:
 
 ```
 ...
