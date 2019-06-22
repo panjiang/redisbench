@@ -3,12 +3,13 @@ package main
 import (
 	"fmt"
 	"log"
+	"time"
+
 	"github.com/panjiang/redisbench/config"
 	"github.com/panjiang/redisbench/models"
 	"github.com/panjiang/redisbench/tester"
 	"github.com/panjiang/redisbench/utils"
 	"github.com/panjiang/redisbench/wares"
-	"time"
 
 	"github.com/go-redis/redis"
 )
