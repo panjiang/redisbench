@@ -4,9 +4,9 @@ import (
 	"errors"
 	"log"
 	"net/rpc"
-	"redisbench/config"
-	"redisbench/models"
-	"redisbench/utils"
+	"github.com/panjiang/redisbench/config"
+	"github.com/panjiang/redisbench/models"
+	"github.com/panjiang/redisbench/utils"
 	"strings"
 	"time"
 )

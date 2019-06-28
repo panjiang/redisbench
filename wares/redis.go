@@ -1,7 +1,7 @@
 package wares
 
 import (
-	"redisbench/config"
+	"github.com/panjiang/redisbench/config"
 	"strings"
 
 	"github.com/go-redis/redis"
@@ -23,10 +23,11 @@ func newRedisClient(addr string, pwd string, db int) (redis.UniversalClient, err
 }
 
 // A redis cluster client instance
-func newRedisClusterClient(nodesAddr string) (redis.UniversalClient, error) {
+func newRedisClusterClient(nodesAddr string, pwd string) (redis.UniversalClient, error) {
 	addrsArray := strings.Split(nodesAddr, ",")
 	client := redis.NewUniversalClient(&redis.UniversalOptions{
 		Addrs: addrsArray,
+		Password: pwd,
 	})
 
 	_, err := client.Ping().Result()
@@ -40,7 +41,7 @@ func newRedisClusterClient(nodesAddr string) (redis.UniversalClient, error) {
 // NewUniversalRedisClient Creates a new universal redis client, no matter single instance or redis cluster
 func NewUniversalRedisClient() (redisClient redis.UniversalClient, err error) {
 	if config.ClusterMode {
-		redisClient, err = newRedisClusterClient(config.RedisAddr)
+		redisClient, err = newRedisClusterClient(config.RedisAddr, config.RedisPassword)
 	} else {
 		redisClient, err = newRedisClient(config.RedisAddr, config.RedisPassword, config.RedisDB)
 	}

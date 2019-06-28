@@ -5,8 +5,8 @@ import (
 	"net"
 	"net/http"
 	"net/rpc"
-	"redisbench/models"
-	"redisbench/utils"
+	"github.com/panjiang/redisbench/models"
+	"github.com/panjiang/redisbench/utils"
 )
 
 // RPC : RPC class between nodes
