@@ -5,6 +5,7 @@ import (
 	"net"
 	"net/http"
 	"net/rpc"
+
 	"github.com/panjiang/redisbench/models"
 	"github.com/panjiang/redisbench/utils"
 )

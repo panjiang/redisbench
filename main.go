@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"time"
@@ -11,7 +12,7 @@ import (
 	"github.com/panjiang/redisbench/utils"
 	"github.com/panjiang/redisbench/wares"
 
-	"github.com/go-redis/redis"
+	"github.com/go-redis/redis/v8"
 )
 
 func clientRun(id int, times int, size int, redisClient redis.UniversalClient) {
@@ -20,7 +21,7 @@ func clientRun(id int, times int, size int, redisClient redis.UniversalClient) {
 	var err error
 	for i := 0; i < times; i++ {
 		key := fmt.Sprintf("benchmark.set.%d.%d", id, i)
-		err = redisClient.Set(key, val, 0).Err()
+		err = redisClient.Set(context.Background(), key, val, 0).Err()
 		utils.FatalErr(err)
 	}
 }
