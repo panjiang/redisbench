@@ -4,11 +4,12 @@ import (
 	"errors"
 	"log"
 	"net/rpc"
+	"strings"
+	"time"
+
 	"github.com/panjiang/redisbench/config"
 	"github.com/panjiang/redisbench/models"
 	"github.com/panjiang/redisbench/utils"
-	"strings"
-	"time"
 )
 
 // MasterNodeOrder : The order of master node's

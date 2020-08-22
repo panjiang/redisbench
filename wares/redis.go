@@ -1,10 +1,12 @@
 package wares
 
 import (
-	"github.com/panjiang/redisbench/config"
+	"context"
 	"strings"
 
-	"github.com/go-redis/redis"
+	"github.com/panjiang/redisbench/config"
+
+	"github.com/go-redis/redis/v8"
 )
 
 // A single instance redis client instance
@@ -15,7 +17,7 @@ func newRedisClient(addr string, pwd string, db int) (redis.UniversalClient, err
 		DB:       db,
 	})
 
-	_, err := client.Ping().Result()
+	_, err := client.Ping(context.Background()).Result()
 	if err != nil {
 		return nil, err
 	}
@@ -26,11 +28,11 @@ func newRedisClient(addr string, pwd string, db int) (redis.UniversalClient, err
 func newRedisClusterClient(nodesAddr string, pwd string) (redis.UniversalClient, error) {
 	addrsArray := strings.Split(nodesAddr, ",")
 	client := redis.NewUniversalClient(&redis.UniversalOptions{
-		Addrs: addrsArray,
+		Addrs:    addrsArray,
 		Password: pwd,
 	})
 
-	_, err := client.Ping().Result()
+	_, err := client.Ping(context.Background()).Result()
 	if err != nil {
 		return nil, err
 	}
