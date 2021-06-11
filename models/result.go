@@ -1,9 +1,11 @@
 package models
 
+import "time"
+
 // SummaryResult : Summary result of all nodes
 type SummaryResult struct {
 	TotalTimes int64
-	TotalDur   int64
+	TotalDur   time.Duration
 	TPS        int
 }
 
@@ -11,7 +13,7 @@ type SummaryResult struct {
 type NodeResult struct {
 	Order      int
 	TotalTimes int64
-	TotalDur   int64
-	TsBeg      int64
-	TsEnd      int64
+	TotalDur   time.Duration
+	TsBeg      time.Time
+	TsEnd      time.Time
 }

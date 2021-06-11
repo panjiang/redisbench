@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  redis:
+    image: redis:5
+    ports:
+      - "6379:6379"
+    volumes:
+      - ~/docker/redisbench/redis:/data
+    command: redis-server --appendonly yes

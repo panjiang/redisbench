@@ -2,10 +2,12 @@ package tester
 
 import (
 	"errors"
-	"log"
+	"fmt"
 	"net/rpc"
 	"strings"
 	"time"
+
+	"github.com/rs/zerolog/log"
 
 	"github.com/panjiang/redisbench/config"
 	"github.com/panjiang/redisbench/models"
@@ -14,6 +16,14 @@ import (
 
 // MasterNodeOrder : The order of master node's
 const MasterNodeOrder int = 1
+
+func NodeName(order int, addr string) string {
+	return fmt.Sprintf("#%d@%s", order, addr)
+}
+
+func CalTps(times int64, dur time.Duration) int64 {
+	return int64(float64(times) / dur.Seconds())
+}
 
 // MultiTester : Multiple testers class
 type MultiTester struct {
@@ -43,7 +53,7 @@ func (mt *MultiTester) connectToNodes() error {
 			return err
 		}
 		mt.Nodes[order] = client
-		log.Printf("connected to node: %s#%d", addr, order)
+		log.Info().Str("node", NodeName(order, addr)).Msg("Connected")
 	}
 	return nil
 }
@@ -76,7 +86,11 @@ func (mt *MultiTester) NoticeMasterSettle(result *models.NodeResult) {
 
 // NodeSettle : One node settle method
 func (mt *MultiTester) NodeSettle(result *models.NodeResult) {
-	log.Printf("node settle: %s#%d SUM:%d DUR:%.3fs", mt.Addrs[result.Order], result.Order, result.TotalTimes, float64(result.TotalDur)/1000)
+	log.Info().
+		Str("node", NodeName(result.Order, mt.Addrs[result.Order])).
+		Stringer("duration", result.TotalDur).
+		Int64("tps", CalTps(result.TotalTimes, result.TotalDur)).
+		Msg("* Settle")
 	mt.Results[result.Order] = result
 
 	for _, result := range mt.Results {
@@ -96,15 +110,15 @@ func (mt *MultiTester) Summary() *models.SummaryResult {
 	tsMax := mt.Results[MasterNodeOrder].TsEnd
 	for _, result := range mt.Results {
 		summary.TotalTimes += result.TotalTimes
-		if result.TsBeg < tsMin {
+		if result.TsBeg.Before(tsMin) {
 			tsMin = result.TsBeg
 		}
-		if result.TsEnd > tsMax {
+		if result.TsEnd.After(tsMax) {
 			tsMax = result.TsEnd
 		}
 	}
-	summary.TotalDur = tsMax - tsMin
-	summary.TPS = int(summary.TotalTimes / (summary.TotalDur / 1000.0))
+	summary.TotalDur = tsMax.Sub(tsMin)
+	summary.TPS = int(float64(summary.TotalTimes) / summary.TotalDur.Seconds())
 	return summary
 }
 

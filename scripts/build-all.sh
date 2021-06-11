@@ -4,7 +4,7 @@ set -e
 
 APP="redisbench"
 PLATFORMS="darwin freebsd linux windows"
-ARCHS="amd64 386"
+ARCHS="amd64"
 
 for OS in ${PLATFORMS[@]}; do 
     for ARCH in ${ARCHS[@]}; do 

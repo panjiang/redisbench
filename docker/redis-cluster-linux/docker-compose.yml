@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  redis1:
+    image: redis:5
+    network_mode: host
+    volumes:
+      - ~/docker/redis-cluster/redis1:/data
+    command: redis-server --port 6001 --appendonly yes --cluster-enabled yes
+
+  redis2:
+    image: redis:5
+    network_mode: host
+    volumes:
+      - ~/docker/redis-cluster/redis2:/data
+    command: redis-server --port 6002 --appendonly yes --cluster-enabled yes 
+
+  redis3:
+    image: redis:5
+    network_mode: host
+    volumes:
+      - ~/docker/redis-cluster/redis3:/data
+    command: redis-server --port 6003 --appendonly yes --cluster-enabled yes 
+  
+  redis4:
+    image: redis:5
+    network_mode: host
+    volumes:
+      - ~/docker/redis-cluster/redis4:/data
+    command: redis-server --port 6004 --appendonly yes --cluster-enabled yes 
+
+  redis5:
+    image: redis:5
+    network_mode: host
+    volumes:
+      - ~/docker/redis-cluster/redis5:/data
+    command: redis-server --port 6005 --appendonly yes --cluster-enabled yes 
+
+  redis6:
+    image: redis:5
+    network_mode: host
+    volumes:
+      - ~/docker/redis-cluster/redis6:/data
+    command: redis-server --port 6006 --appendonly yes --cluster-enabled yes 
