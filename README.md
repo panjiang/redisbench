@@ -36,7 +36,7 @@ Usage of redisbench:
 ## Example
 
 ```
-go run main.go -a localhost:6379 -c 10 -n 5000 -d 1000
+./redisbench -a localhost:6379 -c 10 -n 5000 -d 1000
 ```
 
 ![](doc/one.png)
@@ -44,13 +44,13 @@ go run main.go -a localhost:6379 -c 10 -n 5000 -d 1000
 ### Use multiple testing nodes
 
 ```sh
-go run main.go -a localhost:6379 -c 10 -n 2000 -d 1000 -ma localhost:9001,localhost:9002 -mo 1
+./redisbench -a localhost:6379 -c 10 -n 2000 -d 1000 -ma localhost:9001,localhost:9002 -mo 1
 ```
 
 ![](doc/mo1.png)
 
 ```sh
-go run main.go -a localhost:6379 -c 10 -n 2000 -d 1000 -ma localhost:9001,localhost:9002 -mo 2
+./redisbench -a localhost:6379 -c 10 -n 2000 -d 1000 -ma localhost:9001,localhost:9002 -mo 2
 ```
 
 ![](doc/mo2.png)
